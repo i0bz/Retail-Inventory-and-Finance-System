@@ -49,6 +49,7 @@ void* search(Hashmap* map, void* key) {
     if (list == NULL) return NULL;
     
     Node* iterating_node = list->head;
+    if (compare_keys(key, iterating_node->key)) return iterating_node->data;
 
     while (iterating_node != list->tail) {
         if (compare_keys(key, iterating_node->key)) return iterating_node->data;
@@ -90,6 +91,14 @@ void remove(Hashmap* map , void* key) {
 }
 
 
-void foreach(Hashmap* map, void (*func)()) {
-
+void foreach(Hashmap* map, void (*func)(void*)) {
+    for (size_t i = 0; i < map->bucket_size; i++) {
+        if (map->buckets[i].head == NULL) continue;
+        List* list = &map->buckets[i];
+        Node* iterator = list->head;
+        while (iterator != NULL) {
+            func(iterator->data);
+            iterator = iterator->next;
+        }
+    }
 }

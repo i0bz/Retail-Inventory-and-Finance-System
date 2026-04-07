@@ -36,7 +36,7 @@ void free_hashmap(Hashmap* map);
 void push(Hashmap* map, void* key, void* object);
 void remove(Hashmap* map , void* key);
 void* search(Hashmap* map, void* key);
-void foreach(Hashmap* map, void (*func)());
+void foreach(Hashmap* map, void (*func)(void*));
 
 
 
