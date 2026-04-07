@@ -3,8 +3,10 @@
 
 #include <stddef.h>
 
+typedef unsigned int ID;
+
 typedef struct Product {
-    unsigned int id;
+    ID id;
     char* name;
     char* category;
     float price;

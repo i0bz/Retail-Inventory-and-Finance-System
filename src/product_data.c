@@ -1,5 +1,28 @@
 #include "m_hashmap.h"
-#include "product.h"
+#include "inventory.h"
+
+static Hashmap* inventory = NULL;
+
+
+//Need to declare since i made a generic hashmap
+size_t hash_function(Hashmap* map, void* key) {
+    return (*(ID*)key) % map->bucket_size;
+}
+bool compare_keys (void* key_1, void* key_2) {
+    return key_1 == key_2;
+}
+
+
+
+void open_inventory() {
+    if (inventory != NULL) return;
+    inventory = create_hashmap();
+}
+
+void close_inventory() {
+    if (inventory == NULL) return;
+    free(inventory);
+}
 
 Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity, size_t sold) {
     Product* product = malloc(sizeof(Product));
@@ -11,4 +34,14 @@ Product* create_product(unsigned int id, char* name, char* category, float price
     product->sold = 0;
 
     return product;
+}
+
+void add_to_inventory(Product* product) {
+    push(inventory, (void*)(&product->id), product);
+}
+void remove_from_inventory(ID id) {
+    remove(inventory, (void*)&id);
+}
+Product* retrieve_from_inventory(ID id) {
+    return search(inventory, (void*)&id);
 }
