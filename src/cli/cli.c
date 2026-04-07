@@ -7,6 +7,7 @@ enum {
     UPDATE,
     DELETE,
     PROCESS,
+    DISPLAY_TOTAL,
     SAVE,
     EXIT
 };
@@ -39,6 +40,9 @@ void init_cli() {
             break;
         case PROCESS:
             process_sale();
+            break;
+        case DISPLAY_TOTAL:
+            display_total_inventory();
             break;
         case SAVE:
             save_bin_data();

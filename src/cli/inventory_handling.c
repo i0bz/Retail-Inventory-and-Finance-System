@@ -2,6 +2,7 @@
 
 #define HEADER_LINES "=======================================================================================================\n"
 #define SMALL_HEADER_LINES "========================\n"
+#define MEDIUM_HEADER_LINES "=============================================\n"
 enum {
     NAME = 1,
     PRICE,
@@ -9,6 +10,7 @@ enum {
     QUANTITY,
     EXIT
 };
+
 
 
 static void update_category(Product* product) {
@@ -36,13 +38,17 @@ static void update_name(Product* product) {
 
 static void product_stats_header() {
     printf(HEADER_LINES);
-    printf("%-15s%-25s%-25s%-15s%-15s%-15s\n","ID", "Name", "Category", "Price", "Stock", "Sold");
+    printf("%-15s%-25s%-25s%-15s%-15s%-15s\n","ID", "Product Name", "Category", "Price", "Stock", "Sold");
     printf(HEADER_LINES);
 }
-static void product_stats(void *data) {
+static void product_stats(void* data) {
     Product* product = data;
     printf("%-15llu%-25s%-25s%-15.2f%-15llu%-15llu\n", product->id, product->name, product->category, product->price, product->quantity, product->sold);
 }
+
+
+
+
 static void exit_prompt() {
     printf("Enter any to exit: ");
     char temp[5];
@@ -59,8 +65,9 @@ void main_menu() {
     printf("4. Update Product\n");
     printf("5. Delete Product\n");
     printf("6. Process Sale\n");
-    printf("7. Save Records\n");
-    printf("8. Exit\n");
+    printf("7. Display Total Inventory Value\n");
+    printf("8. Save Records\n");
+    printf("9. Exit\n");
 }
 
 void add_product() {
@@ -226,3 +233,25 @@ void delete_product() {
     exit_prompt();
 }
 
+
+
+static size_t total_inventory_amount = 0;
+
+static void get_product_stocks(void* data) {
+    Product* product = data;
+    total_inventory_amount += product->quantity;
+    printf("%-15llu%-25s%-15llu\n", product->id, product->name, product->quantity);
+}
+
+void display_total_inventory() {
+total_inventory_amount = 0;
+    printf(MEDIUM_HEADER_LINES);
+    printf("%-15s%-25s%-15s\n", "ID", "Product Name", "Stock");
+    printf(MEDIUM_HEADER_LINES);
+    for_every_item(get_product_stocks);
+    printf(MEDIUM_HEADER_LINES);
+    printf("%-15s%-15llu\n", "Total Stocks", total_inventory_amount);
+    printf(MEDIUM_HEADER_LINES);
+
+    exit_prompt();
+}

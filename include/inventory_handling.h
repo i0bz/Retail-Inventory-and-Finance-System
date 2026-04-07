@@ -12,6 +12,7 @@ void display_products();
 void search_product();
 void update_product();
 void process_sale();
+void display_total_inventory();
 
 
 #endif
