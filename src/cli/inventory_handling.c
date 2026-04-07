@@ -69,13 +69,6 @@ void add_product() {
     printf(SMALL_HEADER_LINES);
 
     size_t id;
-    char* name;
-    char* category;
-    float price;
-    size_t quantity;
-    size_t sold;
-
-    
     printf("ID: ");
     id = positive_integer_input();
     while (retrieve_from_inventory(id) != NULL) {
@@ -84,15 +77,19 @@ void add_product() {
     }
     
     printf("Name: ");
+char* name;
     name = string_input();
     
     printf("Category: ");
+char* category;
     category = string_input();
     
     printf("Price: ");
+float price;
     price = positive_float_input();
     
     printf("Quantity: ");
+size_t quantity;
     quantity = positive_integer_input();
     
     add_to_inventory(create_product(id, name, category, price, quantity));
