@@ -1,7 +1,11 @@
 #include "m_hashmap.h"
+#include <stdio.h>
 
 Node* create_node(void* key, void* data) {
     Node* node = malloc(sizeof(Node));
+
+    if (node == NULL) return NULL;
+
     node->data = data;
     node->key = key;
     node->next = NULL;
@@ -11,6 +15,9 @@ Node* create_node(void* key, void* data) {
 
 Hashmap* create_hashmap() {
     Hashmap* map = calloc(1, sizeof(Hashmap));
+    
+    if (map == NULL) return NULL;
+
     map->bucket_size = DEFAULT_BUCKET_SIZE;
     return map;
 }
@@ -40,6 +47,11 @@ void push(Hashmap* map, void* key, void* object) {
 
     List* list = &map->buckets[bucket_index];
     Node* node = create_node(key, object);
+
+    if (node == NULL) {
+        fprintf(stderr, "Could not allocate a node!!!");
+        return;
+    }
     
     if(list->head == NULL) {
         list->head = node;
