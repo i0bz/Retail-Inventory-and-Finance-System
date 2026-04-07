@@ -15,6 +15,6 @@ typedef struct Product {
 } Product;
 
 
-Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity, size_t sold);
+Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity);
 
 #endif

@@ -9,22 +9,23 @@ size_t hash_function(Hashmap* map, void* key) {
     return (*(ID*)key) % map->bucket_size;
 }
 bool compare_keys (void* key_1, void* key_2) {
-    return key_1 == key_2;
+    return *(ID*)key_1 == *(ID*)key_2;
 }
 
-
+void for_every_item(void(*func)()) {
+    foreach(inventory, func);
+}
 
 void open_inventory() {
     if (inventory != NULL) return;
     inventory = create_hashmap();
 }
-
 void close_inventory() {
     if (inventory == NULL) return;
     free(inventory);
 }
 
-Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity, size_t sold) {
+Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity) {
     Product* product = malloc(sizeof(Product));
     product->id = id;
     product->name = name;
