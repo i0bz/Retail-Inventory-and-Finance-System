@@ -13,6 +13,7 @@ void search_product();
 void update_product();
 void process_sale();
 void display_total_inventory();
+void display_top_seller();
 
 
 #endif

@@ -255,3 +255,28 @@ total_inventory_amount = 0;
 
     exit_prompt();
 }
+
+static Product* top_seller = NULL;
+
+
+void top_selling_product(void* data) {
+    Product* product = data;
+    if (top_seller == NULL) {
+        top_seller = product;
+        return;
+    }
+    if (product->sold > top_seller->sold) top_seller = product;
+}
+
+void display_top_seller() {
+    top_seller = NULL;
+    for_every_item(top_selling_product);
+
+    printf(MEDIUM_HEADER_LINES);
+    printf("%-15s%-25s%-15s\n", "ID", "Product Name", "Sold");
+    printf(MEDIUM_HEADER_LINES);
+    printf("%-15llu%-15s%15llu\n", top_seller->id, top_seller->name, top_seller->sold);
+    printf(MEDIUM_HEADER_LINES);
+    exit_prompt();
+}
+

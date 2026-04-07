@@ -10,7 +10,7 @@ void close_inventory();
 void add_to_inventory(Product* product);
 void remove_from_inventory(ID id);
 Product* retrieve_from_inventory(ID id);
-
+size_t inventory_usage();
 
 void for_every_item(void(*func)(void*));
 
