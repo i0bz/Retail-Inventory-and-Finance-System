@@ -3,7 +3,7 @@
 #define HEADER_LINES "================================================================================================\n"
 
 enum {
-    NAME,
+    NAME = 1,
     PRICE,
     CATEGORY,
     QUANTITY,
@@ -143,7 +143,7 @@ void update_product() {
         exit_prompt();
         return;
     }
-    
+
     int option;
     while (1) {
         printf(HEADER_LINES);
