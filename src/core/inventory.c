@@ -44,7 +44,7 @@ void add_to_inventory(Product* product) {
     push(inventory, (void*)(&product->id), product);
 }
 void remove_from_inventory(ID id) {
-    remove(inventory, (void*)&id);
+    pop(inventory, (void*)&id);
 }
 Product* retrieve_from_inventory(ID id) {
     return search(inventory, (void*)&id);

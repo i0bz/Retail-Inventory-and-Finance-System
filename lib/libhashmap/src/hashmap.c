@@ -86,7 +86,7 @@ void* search(Hashmap* map, void* key) {
 
     return NULL;
 }
-void remove(Hashmap* map , void* key) {
+void pop(Hashmap* map , void* key) {
     size_t bucket_index = hash_function(map, key);
 
     List* list = &map->buckets[bucket_index];
