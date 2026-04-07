@@ -1,6 +1,8 @@
 #include "m_hashmap.h"
 #include "inventory.h"
 
+#include <string.h>
+
 static Hashmap* inventory = NULL;
 
 //HASHMAP INTERFACE FUNCTION IMPLEMENTATIONS
@@ -13,11 +15,23 @@ bool compare_keys (void* key_1, void* key_2) {
 }
 
 
+Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity) {
+    Product* product = malloc(sizeof(Product));
+    product->id = id;
+    strncpy(product->name, name, PRODUCT_STRING_BUFFER_SIZE);
+    strncpy(product->category, category, PRODUCT_STRING_BUFFER_SIZE);
+    product->price = price;
+    product->quantity = quantity;
+    product->sold = 0;
 
-
-void for_every_item(void(*func)(void*)) {
-    foreach(inventory, func);
+    return product;
 }
+
+
+
+
+
+
 
 void open_inventory() {
     if (inventory != NULL) return;
@@ -28,17 +42,7 @@ void close_inventory() {
     free(inventory);
 }
 
-Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity) {
-    Product* product = malloc(sizeof(Product));
-    product->id = id;
-    product->name = name;
-    product->category = category;
-    product->price = price;
-    product->quantity = quantity;
-    product->sold = 0;
 
-    return product;
-}
 
 void add_to_inventory(Product* product) {
     push(inventory, (void*)(&product->id), product);
@@ -48,4 +52,9 @@ void remove_from_inventory(ID id) {
 }
 Product* retrieve_from_inventory(ID id) {
     return search(inventory, (void*)&id);
+}
+
+
+void for_every_item(void(*func)(void*)) {
+    foreach(inventory, func);
 }
