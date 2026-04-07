@@ -48,7 +48,7 @@ char* string_input() {
     char* buffer = malloc(sizeof(char) * PRODUCT_STRING_BUFFER_SIZE);
     fgets(buffer, PRODUCT_STRING_BUFFER_SIZE, stdin);
     char* new_line = strchr(buffer, '\n');
-    if (new_line != NULL) new_line = '\0';
+    if (new_line != NULL) *new_line = '\0';
 
     return buffer;
 }
