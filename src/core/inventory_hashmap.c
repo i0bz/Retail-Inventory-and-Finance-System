@@ -31,7 +31,10 @@ Product* create_product(unsigned int id, char* name, char* category, float price
 
 
 
-
+size_t inventory_usage() {
+    if (inventory != NULL) return NULL;
+    return inventory->usage;
+}
 
 void open_inventory() {
     if (inventory != NULL) return;

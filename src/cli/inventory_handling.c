@@ -1,7 +1,7 @@
 #include "inventory_handling.h"
 
-#define HEADER_LINES "================================================================================================\n"
-
+#define HEADER_LINES "=======================================================================================================\n"
+#define SMALL_HEADER_LINES "========================\n"
 enum {
     NAME = 1,
     PRICE,
@@ -36,12 +36,12 @@ static void update_name(Product* product) {
 
 static void product_stats_header() {
     printf(HEADER_LINES);
-    printf("ID\t\tName\t\tCategory\t\tPrice\t\tStock\t\tSold\n");
+    printf("%-15s%-25s%-25s%-15s%-15s%-15s\n","ID", "Name", "Category", "Price", "Stock", "Sold");
     printf(HEADER_LINES);
 }
 static void product_stats(void *data) {
     Product* product = data;
-    printf("%llu\t\t%s\t\t%s\t\t%.2f\t\t%llu\t\t%llu\n", product->id, product->name, product->category, product->price, product->quantity, product->sold);
+    printf("%-15llu%-25s%-25s%-15.2f%-15llu%-15llu\n", product->id, product->name, product->category, product->price, product->quantity, product->sold);
 }
 static void exit_prompt() {
     printf("Enter any to exit: ");
@@ -50,9 +50,9 @@ static void exit_prompt() {
 }
 
 void main_menu() {
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("RETAIL STORE SYSTEM\n");
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("1. Add Product\n");
     printf("2. Display Products\n");
     printf("3. Search Product\n");
@@ -64,9 +64,9 @@ void main_menu() {
 }
 
 void add_product() {
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("Add Product\n");
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
 
     size_t id;
     char* name;
@@ -97,21 +97,21 @@ void add_product() {
     
     add_to_inventory(create_product(id, name, category, price, quantity));
 
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     exit_prompt();
 }
 
 void display_products() {
     product_stats_header();
     for_every_item(product_stats);
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     exit_prompt();
 }
 
 void search_product() {
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("Product Search\n");
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
 
     size_t id;
     printf("Enter ID: ");
@@ -124,15 +124,15 @@ void search_product() {
     }
     product_stats_header();
     product_stats(product);
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     exit_prompt();
     
 }
 
 void update_product() {
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("Product Update\n");
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     
     size_t id;
     printf("Enter ID: ");
@@ -146,7 +146,7 @@ void update_product() {
 
     int option;
     while (1) {
-        printf(HEADER_LINES);
+        printf(SMALL_HEADER_LINES);
         printf("1. Product Name\n");
         printf("2. Price\n");
         printf("3. Category\n");
@@ -182,9 +182,9 @@ void update_product() {
 }
 
 void process_sale() {
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("Process Sale\n");
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
 
     size_t id;
     printf("Enter ID: ");
@@ -210,9 +210,9 @@ void process_sale() {
 }
 
 void delete_product() {
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     printf("Delete Product\n");
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
 
     size_t id;
     printf("Enter ID: ");
@@ -225,7 +225,7 @@ void delete_product() {
     }
 
     remove_from_inventory((ID)id);
-    printf(HEADER_LINES);
+    printf(SMALL_HEADER_LINES);
     exit_prompt();
 }
 
