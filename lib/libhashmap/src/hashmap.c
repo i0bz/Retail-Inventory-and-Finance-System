@@ -56,6 +56,7 @@ void push(Hashmap* map, void* key, void* object) {
     if(list->head == NULL) {
         list->head = node;
         list->tail = node;
+        map->usage++;
         return;
     }
     
@@ -68,6 +69,7 @@ void push(Hashmap* map, void* key, void* object) {
 
     list->tail->next = node;
     list->tail = node;
+    map->usage++;
 }
 void* search(Hashmap* map, void* key) {
     size_t bucket_index = hash_function(map, key);
@@ -106,6 +108,7 @@ void remove(Hashmap* map , void* key) {
     if (fast == list->head) {
         list->head = list->head->next;
         free(fast);
+        map->usage++;
         return;
     }
 
@@ -115,16 +118,21 @@ void remove(Hashmap* map , void* key) {
     
     slow->next = fast->next;
     free(fast);
+    map->usage--;
 }
 
 
 void foreach(Hashmap* map, void (*func)(void*)) {
+
+    size_t amount = 0;
     for (size_t i = 0; i < map->bucket_size; i++) {
+        if (amount == map->usage) return;
         if (map->buckets[i].head == NULL) continue;
         List* list = &map->buckets[i];
         Node* iterator = list->head;
         while (iterator != NULL) {
             func(iterator->data);
+            amount++;
             iterator = iterator->next;
         }
     }
