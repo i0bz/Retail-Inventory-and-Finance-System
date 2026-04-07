@@ -9,6 +9,7 @@ enum {
     PROCESS,
     DISPLAY_TOP_SELLER,
     DISPLAY_TOTAL,
+    FILTER,
     SAVE,
     EXIT
 };
@@ -47,6 +48,9 @@ void init_cli() {
             break;
         case DISPLAY_TOTAL:
             display_total_inventory();
+            break;
+        case FILTER:
+            filter_by_category();
             break;
         case SAVE:
             save_bin_data();

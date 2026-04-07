@@ -65,9 +65,11 @@ void main_menu() {
     printf("4. Update Product\n");
     printf("5. Delete Product\n");
     printf("6. Process Sale\n");
-    printf("7. Display Total Inventory Value\n");
-    printf("8. Save Records\n");
-    printf("9. Exit\n");
+    printf("7. Display Top Selling Product\n");
+    printf("8. Display Total Inventory Amount\n");
+    printf("9. Filter by Category\n");
+    printf("10. Save Records\n");
+    printf("11. Exit\n");
 }
 
 void add_product() {
@@ -84,19 +86,19 @@ void add_product() {
     }
     
     printf("Name: ");
-char* name;
+    char* name;
     name = string_input();
     
     printf("Category: ");
-char* category;
+    char* category;
     category = string_input();
     
     printf("Price: ");
-float price;
+    float price;
     price = positive_float_input();
     
     printf("Quantity: ");
-size_t quantity;
+    size_t quantity;
     quantity = positive_integer_input();
     
     add_to_inventory(create_product(id, name, category, price, quantity));
@@ -244,7 +246,7 @@ static void get_product_stocks(void* data) {
 }
 
 void display_total_inventory() {
-total_inventory_amount = 0;
+    total_inventory_amount = 0;
     printf(MEDIUM_HEADER_LINES);
     printf("%-15s%-25s%-15s\n", "ID", "Product Name", "Stock");
     printf(MEDIUM_HEADER_LINES);
@@ -280,3 +282,51 @@ void display_top_seller() {
     exit_prompt();
 }
 
+
+
+static char* category_filter = NULL;
+static size_t array_iterator = 0;
+static Product** products_array = NULL;
+
+void get_filtered_products(void* data) {
+    Product* product = data;
+    if (strcmp(product->category, category_filter) == 0) 
+        products_array[array_iterator++] = product;
+}
+
+void filter_by_category() {
+    array_iterator = 0;
+    size_t size = inventory_usage();
+    products_array = calloc(size, sizeof(Product*));
+    printf(MEDIUM_HEADER_LINES);
+    printf("Filter by Category\n");
+    printf(MEDIUM_HEADER_LINES);
+
+    printf("Enter category: ");
+    category_filter = string_input();
+
+    for_every_item(get_filtered_products);
+
+    if (products_array[0] != NULL) {
+        product_stats_header();
+        for (size_t i = 0; i < size; i++) {
+            if (products_array[i] == NULL) break;
+            product_stats(products_array[i]);
+        }
+        printf(MEDIUM_HEADER_LINES);
+    } else {
+        printf(MEDIUM_HEADER_LINES);
+        printf("No product found with category: %s\n", category_filter);
+        printf(MEDIUM_HEADER_LINES);
+    }
+    
+
+
+    free(category_filter);
+    category_filter = NULL;
+
+    free(products_array);
+    products_array = NULL;
+
+    exit_prompt();
+}
