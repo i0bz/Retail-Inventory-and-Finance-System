@@ -67,7 +67,7 @@ void* search(Hashmap* map, void* key) {
     Node* iterating_node = list->head;
     if (compare_keys(key, iterating_node->key)) return iterating_node->data;
 
-    while (iterating_node != list->tail) {
+    while (iterating_node != NULL) {
         if (compare_keys(key, iterating_node->key)) return iterating_node->data;
         iterating_node = iterating_node->next;
     }
