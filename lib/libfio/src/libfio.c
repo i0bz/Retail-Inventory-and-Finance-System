@@ -1,7 +1,7 @@
 #include "libfio.h"
 #include <string.h>
 
-static const size_t INITIAL_BUFFERSIZE = 12;
+#define INITIAL_BUFFERSIZE 12
 
 
 char* getline(FILE* file) {
