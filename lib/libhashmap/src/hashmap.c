@@ -14,6 +14,7 @@ Hashmap* create_hashmap() {
     map->bucket_size = DEFAULT_BUCKET_SIZE;
     return map;
 }
+
 void free_hashmap(Hashmap* map) {
     free(map);
 }
@@ -63,7 +64,7 @@ void remove(Hashmap* map , void* key) {
 
     List* list = &map->buckets[bucket_index];
     
-    if (list == NULL) return;
+    if (list->head == NULL) return;
     
     Node* slow = NULL;
     Node* fast = list->head;
@@ -76,8 +77,8 @@ void remove(Hashmap* map , void* key) {
 
     
     if (fast == list->head) {
-        list->head = NULL;
-        list->tail = NULL;
+        list->head = list->tail;
+        list->tail = list->head;
         free(fast);
         return;
     }
