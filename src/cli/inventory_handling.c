@@ -2,6 +2,15 @@
 
 #define HEADER_LINES "================================================================================================\n"
 
+enum {
+    NAME,
+    PRICE,
+    CATEGORY,
+    QUANTITY,
+    EXIT
+};
+
+
 static void update_category(Product* product) {
     printf("Enter Category: ");
     char* category = string_input();
@@ -134,13 +143,9 @@ void update_product() {
         exit_prompt();
         return;
     }
-    int option = 0;
-    while (option != 5) {
-        if (option > 5) {
-            printf("Choose from 1-5: ");
-            option = (int) positive_integer_input();
-            continue;
-        }
+    
+    int option;
+    while (1) {
         printf(HEADER_LINES);
         printf("1. Product Name\n");
         printf("2. Price\n");
@@ -153,17 +158,23 @@ void update_product() {
 
         switch (option)
         {
-        case 1:
+        case NAME:
             update_name(product);
             break;
-        case 2:
+        case PRICE:
             update_price(product);
             break;
-        case 3:
+        case CATEGORY:
             update_category(product);
             break;
-        case 4:
+        case QUANTITY:
             update_quantity(product);
+            break;
+        case EXIT:
+            return;
+        default:
+            printf("Choose from 1-5: ");
+            option = (int) positive_integer_input();
             break;
         }
     }
