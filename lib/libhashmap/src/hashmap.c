@@ -76,7 +76,7 @@ void* search(Hashmap* map, void* key) {
     
     List* list = &map->buckets[bucket_index];
     
-    if (list == NULL) return NULL;
+    if (list->head == NULL) return NULL;
     
     Node* iterating_node = list->head;
     if (compare_keys(key, iterating_node->key)) return iterating_node->data;
