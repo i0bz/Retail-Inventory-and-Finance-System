@@ -16,6 +16,21 @@ Hashmap* create_hashmap() {
 }
 
 void free_hashmap(Hashmap* map) {
+    for (size_t i = 0; i < map->bucket_size; i++) {
+        if (map->buckets[i].head == NULL) continue;
+        List* list = &map->buckets[i];
+        Node* fast = list->head;
+        Node* slow = NULL;
+
+        while (fast != NULL) {
+            slow = fast;
+            fast = fast->next;
+            free(slow);
+        }
+    }
+
+
+
     free(map);
 }
 
