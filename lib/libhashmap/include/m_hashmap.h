@@ -24,6 +24,7 @@ typedef struct List {
 typedef struct Hashmap {
     List buckets[DEFAULT_BUCKET_SIZE];
     size_t bucket_size;
+    size_t usage;
 } Hashmap;
 
 
