@@ -92,8 +92,7 @@ void remove(Hashmap* map , void* key) {
 
     
     if (fast == list->head) {
-        list->head = list->tail;
-        list->tail = list->head;
+        list->head = list->head->next;
         free(fast);
         return;
     }
