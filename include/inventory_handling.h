@@ -15,6 +15,7 @@ void process_sale();
 void display_total_inventory();
 void display_top_seller();
 void filter_by_category();
+void sort_by_price();
 
 
 #endif

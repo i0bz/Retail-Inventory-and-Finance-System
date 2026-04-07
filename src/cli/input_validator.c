@@ -1,6 +1,6 @@
 #include "input_validator.h"
 
-static void flush() {
+void flush() {
     char c;
     while ((c = getchar()) != '\n' && c != EOF);
 }

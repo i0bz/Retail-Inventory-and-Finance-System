@@ -1,8 +1,10 @@
 #include "inventory_handling.h"
+#include "my_sort.h"
 
 #define HEADER_LINES "=======================================================================================================\n"
 #define SMALL_HEADER_LINES "========================\n"
 #define MEDIUM_HEADER_LINES "=============================================\n"
+
 enum {
     NAME = 1,
     PRICE,
@@ -49,10 +51,12 @@ static void product_stats(void* data) {
 
 
 
-static void exit_prompt() {
+inline static void exit_prompt() {
     printf("Enter any to exit: ");
     char temp[5];
     fgets(temp, 5,stdin);
+    if (temp[strlen(temp) - 1] != '\n')
+        flush();
 }
 
 void main_menu() {
@@ -68,8 +72,9 @@ void main_menu() {
     printf("7. Display Top Selling Product\n");
     printf("8. Display Total Inventory Amount\n");
     printf("9. Filter by Category\n");
-    printf("10. Save Records\n");
-    printf("11. Exit\n");
+    printf("10. Sort by Price\n");
+    printf("11. Save Records\n");
+    printf("12. Exit\n");
 }
 
 void add_product() {
@@ -301,6 +306,11 @@ void filter_by_category() {
     printf(MEDIUM_HEADER_LINES);
     printf("Filter by Category\n");
     printf(MEDIUM_HEADER_LINES);
+    if (products_array == NULL) {
+        printf("There are no products in the inventory");
+        exit_prompt();
+        return;
+    }
 
     printf("Enter category: ");
     category_filter = string_input();
@@ -319,8 +329,6 @@ void filter_by_category() {
         printf("No product found with category: %s\n", category_filter);
         printf(MEDIUM_HEADER_LINES);
     }
-    
-
 
     free(category_filter);
     category_filter = NULL;
@@ -330,3 +338,37 @@ void filter_by_category() {
 
     exit_prompt();
 }
+
+void put_products_in_array(void* data) {
+    products_array[array_iterator++] = data;
+}
+
+void sort_by_price() {
+    array_iterator = 0;
+    size_t size = inventory_usage();
+    products_array = calloc(size, sizeof(Product*));
+
+    for_every_item(put_products_in_array);
+
+    my_sort(products_array, size);
+
+    product_stats_header();
+    if (products_array == NULL) {
+        printf(HEADER_LINES);
+        exit_prompt();
+        return;
+    }
+
+    for (size_t i = 0; i < size; i++) {
+        product_stats(products_array[i]);
+    }
+
+    
+    printf(HEADER_LINES);
+    exit_prompt();
+    free(products_array);
+    products_array = NULL;
+}
+
+
+

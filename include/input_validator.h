@@ -12,6 +12,7 @@ float float_input();
 char* string_input();
 unsigned long long positive_integer_input();
 float positive_float_input();
+void flush();
 
 
 #endif

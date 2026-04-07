@@ -4,8 +4,14 @@
 #include "product.h"
 #include <stdbool.h>
 
+static bool comparator(Product* x, Product* y) ;
+static void swap(Product** x, Product** y);
+void my_sort(Product* products[], size_t size);
+static void my_qsort(Product* products[], int lower_bound, int upper_bound);
+static int lomuto_partition(Product* products[], size_t lower_bound, size_t upper_bound);
+
 static bool comparator(Product* x, Product* y) {
-    return x->price > y->price;
+    return x->price < y->price;
 }
 
 static void swap(Product** x, Product** y) {
@@ -18,7 +24,7 @@ void my_sort(Product* products[], size_t size) {
     my_qsort(products, 0, size - 1);
 }
 
-void my_qsort(Product* products[], size_t lower_bound, size_t upper_bound) {
+static void my_qsort(Product* products[], int lower_bound, int upper_bound) {
     if (lower_bound >= upper_bound) return;
 
     int pivot = lomuto_partition(products, lower_bound, upper_bound);
@@ -27,7 +33,7 @@ void my_qsort(Product* products[], size_t lower_bound, size_t upper_bound) {
 
 }
 
-int lomuto_partition(Product* products[], size_t lower_bound, size_t upper_bound) {
+static int lomuto_partition(Product* products[], size_t lower_bound, size_t upper_bound) {
     int fast = lower_bound;
     int slow = fast - 1;
 

@@ -10,6 +10,7 @@ enum {
     DISPLAY_TOP_SELLER,
     DISPLAY_TOTAL,
     FILTER,
+    SORT_BY_PRICE,
     SAVE,
     EXIT
 };
@@ -52,13 +53,15 @@ void init_cli() {
         case FILTER:
             filter_by_category();
             break;
+        case SORT_BY_PRICE:
+            sort_by_price();
         case SAVE:
             save_bin_data();
             break;
         case EXIT:
             return;
         default:
-            printf("Choose from 1-8: ");
+            printf("Choose from 1-12: ");
             option = positive_integer_input();
             break;
         }
