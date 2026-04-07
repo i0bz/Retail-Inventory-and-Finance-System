@@ -49,7 +49,7 @@ void push(Hashmap* map, void* key, void* object) {
     Node* node = create_node(key, object);
 
     if (node == NULL) {
-        fprintf(stderr, "Could not allocate a node!!!");
+        perror("Could not allocate a node!!!");
         return;
     }
     
