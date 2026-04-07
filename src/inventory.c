@@ -3,7 +3,7 @@
 
 static Hashmap* inventory = NULL;
 
-
+//HASHMAP INTERFACE FUNCTION IMPLEMENTATIONS
 //Need to declare since i made a generic hashmap
 size_t hash_function(Hashmap* map, void* key) {
     return (*(ID*)key) % map->bucket_size;
@@ -12,7 +12,10 @@ bool compare_keys (void* key_1, void* key_2) {
     return *(ID*)key_1 == *(ID*)key_2;
 }
 
-void for_every_item(void(*func)()) {
+
+
+
+void for_every_item(void(*func)(void*)) {
     foreach(inventory, func);
 }
 

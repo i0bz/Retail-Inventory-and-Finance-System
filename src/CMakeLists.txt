@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 
 
-add_executable(retail_project product_data.c)
+add_executable(retail_project main.c inventory.c)
 target_include_directories(retail_project PRIVATE ${PROJECT_SOURCE_DIR}/include)
 target_link_libraries(retail_project my_hashmap)
 

@@ -12,4 +12,7 @@ void remove_from_inventory(ID id);
 Product* retrieve_from_inventory(ID id);
 
 
+void for_every_item(void(*func)(void*));
+
+
 #endif
