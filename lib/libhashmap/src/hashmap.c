@@ -25,7 +25,7 @@ void push(Hashmap* map, void* key, void* object) {
     List* list = &map->buckets[bucket_index];
     Node* node = create_node(key, object);
     
-    if(list == NULL) {
+    if(list->head == NULL) {
         list->head = node;
         list->tail = node;
         return;
@@ -90,4 +90,6 @@ void remove(Hashmap* map , void* key) {
 }
 
 
-void foreach(Hashmap* map, void (*func)());
+void foreach(Hashmap* map, void (*func)()) {
+
+}
