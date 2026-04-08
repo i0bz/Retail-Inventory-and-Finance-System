@@ -38,7 +38,7 @@ static int lomuto_partition(Product* products[], size_t lower_bound, size_t uppe
     int slow = fast - 1;
 
     while (fast < upper_bound) {
-        if (comparator(products[upper_bound], products[lower_bound])) {
+        if (comparator(products[upper_bound], products[fast])) {
             slow++;
             swap(&products[fast], &products[slow]);
         }
