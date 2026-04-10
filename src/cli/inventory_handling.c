@@ -1,5 +1,5 @@
 #include "inventory_handling.h"
-#include "my_sort.h"
+#include "m_sort.h"
 
 #define HEADER_LINES "=======================================================================================================\n"
 #define SMALL_HEADER_LINES "========================\n"
@@ -343,6 +343,12 @@ void put_products_in_array(void* data) {
     products_array[array_iterator++] = data;
 }
 
+bool comparator(void* x, void* y) {
+    return (*(Product**)x)->price > (*(Product**)y)->price;
+}
+
+
+
 void sort_by_price() {
     array_iterator = 0;
     size_t size = inventory_usage();
@@ -350,7 +356,7 @@ void sort_by_price() {
 
     for_every_item(put_products_in_array);
 
-    my_sort(products_array, size);
+    my_sort((void** )products_array, size, sizeof(Product*));
 
     product_stats_header();
     if (products_array == NULL) {
@@ -358,6 +364,7 @@ void sort_by_price() {
         exit_prompt();
         return;
     }
+
 
     for (size_t i = 0; i < size; i++) {
         product_stats(products_array[i]);
