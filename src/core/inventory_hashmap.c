@@ -36,7 +36,7 @@ size_t inventory_usage() {
 }
 
 void open_inventory() {
-    if (inventory != NULL)
+    if (inventory == NULL)
         inventory = create_hashmap();
 }
 void close_inventory() {
