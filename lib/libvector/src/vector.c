@@ -3,6 +3,7 @@
 #include <string.h>
 
 #define INITIAL_VECTOR_SIZE 5
+#define BYTE char
 
 
 
@@ -12,19 +13,20 @@ static void resize_vector(Vector* container) {
 }
 
 Vector* create_vector(size_t element_size) {
-    Vector* container = malloc(element_size * INITIAL_VECTOR_SIZE);
+    Vector* container = malloc(sizeof(Vector));
+    container->data = malloc(element_size * INITIAL_VECTOR_SIZE);
     container->usage = 0;
     container->capacity = INITIAL_VECTOR_SIZE;
     container->element_size = element_size;
 }
 
 void push_to_vector(Vector* container, void* object) {
-    if (container->usage == container->capacity);
-    resize_vector(container);
+    if (container->usage == container->capacity)
+        resize_vector(container);
 
     memcpy((container->data + (container->usage * container->element_size)), object, container->element_size);
+    container->usage++;
 }
-
 
 void remove_from_vector(Vector* container, size_t index) {
     if (index > container->usage) {
@@ -38,16 +40,14 @@ void remove_from_vector(Vector* container, size_t index) {
     container->usage--;
 }
 
-void foreach_vector_element(Vector* container, void (*func)(void*)) {
-    for (size_t i = 0; i < (container->usage + 1); i++) {
-        func((container->data + (container->usage * container->element_size)));
+void* at_vector(Vector* container, size_t index) {
+    if (index > container->usage) {
+        perror("Index Out of Bounds");
+        return NULL;
     }
+
+    return container->data + (index * container->element_size);
+
 }
 
-void* search_in_vector(Vector* container, void* key) {
-    for (size_t i = 0; i < (container->usage + 1); i++) {
-        if(search_comparator((container->data + (container->usage * container->element_size)), key));
-        return (container->data + (container->usage * container->element_size));
-    }
-}
 
