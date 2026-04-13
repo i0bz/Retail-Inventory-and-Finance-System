@@ -1,4 +1,6 @@
 #include "m_sort.h"
+#include <stdlib.h>
+#include <string.h>
 
 static void my_qsort(void* products[], int lower_bound, int upper_bound, size_t element_size);
 static int lomuto_partition(void* products[], size_t lower_bound, size_t upper_bound, size_t element_size);

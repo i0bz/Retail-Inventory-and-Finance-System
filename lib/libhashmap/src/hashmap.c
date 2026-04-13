@@ -1,5 +1,6 @@
 #include "m_hashmap.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 Node* create_node(void* key, void* data) {
     Node* node = malloc(sizeof(Node));

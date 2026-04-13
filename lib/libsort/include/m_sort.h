@@ -2,8 +2,7 @@
 #define M_SORT_H
 
 #include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
+#include <stddef.h>
 
 bool comparator(void* x, void* y) ;
 void swap(void** x, void** y, size_t element_size);

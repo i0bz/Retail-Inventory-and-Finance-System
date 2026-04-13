@@ -3,7 +3,6 @@
 
 
 #include <stddef.h>
-#include <stdlib.h>
 #include <stdbool.h>
 
 #define DEFAULT_BUCKET_SIZE 1000

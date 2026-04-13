@@ -1,6 +1,7 @@
 #include "m_hashmap.h"
 #include "inventory.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 static Hashmap* inventory = NULL;
