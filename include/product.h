@@ -9,11 +9,11 @@ typedef unsigned long long ID;
 
 typedef struct Product {
     ID id;
-    char name[PRODUCT_STRING_BUFFER_SIZE];
-    char category[PRODUCT_STRING_BUFFER_SIZE];
-    float price;
     size_t quantity;
     size_t sold;
+    float price;
+    char name[PRODUCT_STRING_BUFFER_SIZE];
+    char category[PRODUCT_STRING_BUFFER_SIZE];
 } Product;
 
 
