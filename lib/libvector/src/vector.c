@@ -24,7 +24,7 @@ void push_to_vector(Vector* container, void* object) {
     if (container->usage == container->capacity)
         resize_vector(container);
 
-    memcpy((container->data + (container->usage * container->element_size)), object, container->element_size);
+    memcpy(container->data + (container->usage * container->element_size), object, container->element_size);
     container->usage++;
 }
 
@@ -35,7 +35,7 @@ void remove_from_vector(Vector* container, size_t index) {
     }
     size_t upper_bound = container->usage;
     for (size_t i = index; i < upper_bound; i++) {
-        memcpy((container->data + (container->usage * container->element_size)), (container->data + (container->usage * container->element_size) + 1), container->element_size);
+        memcpy(container->data + (i * container->element_size), container->data + ((i + 1) * container->element_size), container->element_size);
     }
     container->usage--;
 }
