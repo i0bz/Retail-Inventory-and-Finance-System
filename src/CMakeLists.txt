@@ -17,5 +17,5 @@ add_executable(retail_project_vector   main.c
                                 cli/inventory_handling.c
                                 cli/input_validator.c)
 target_include_directories(retail_project_vector PRIVATE ${PROJECT_SOURCE_DIR}/include)
-target_link_libraries(retail_project_vector PRIVATE libfio PRIVATE my_vector)
+target_link_libraries(retail_project_vector PRIVATE libfio PRIVATE my_vector PRIVATE my_qsort)
 
