@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-static void my_qsort(void* products[], int lower_bound, int upper_bound, size_t element_size);
-static int lomuto_partition(void* products[], size_t lower_bound, size_t upper_bound, size_t element_size);
+static void my_qsort(void* products, int lower_bound, int upper_bound, size_t element_size);
+static int lomuto_partition(void* products, size_t lower_bound, size_t upper_bound, size_t element_size);
 
 
 static inline void* get_address(void* begin, size_t index, size_t element_size) {
@@ -19,11 +19,11 @@ void swap(void** x, void** y, size_t element_size) {
     free(temp);
 }
 
-void my_sort(void* collection[], size_t size, size_t element_size) {
+void my_sort(void* collection, size_t size, size_t element_size) {
     my_qsort(collection, 0, size - 1, element_size);
 }
 
-static void my_qsort(void* collection[], int lower_bound, int upper_bound, size_t element_size) {
+static void my_qsort(void* collection, int lower_bound, int upper_bound, size_t element_size) {
     if (lower_bound >= upper_bound) return;
 
     int pivot = lomuto_partition(collection, lower_bound, upper_bound, element_size);
@@ -32,7 +32,7 @@ static void my_qsort(void* collection[], int lower_bound, int upper_bound, size_
 
 }
 
-static int lomuto_partition(void* collection[], size_t lower_bound, size_t upper_bound, size_t element_size) {
+static int lomuto_partition(void* collection, size_t lower_bound, size_t upper_bound, size_t element_size) {
     int fast = lower_bound;
     int slow = fast - 1;
 

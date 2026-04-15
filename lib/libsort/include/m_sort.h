@@ -7,7 +7,7 @@
 bool comparator(void* x, void* y) ;
 void swap(void** x, void** y, size_t element_size);
 
-void my_sort(void* products[], size_t size, size_t element_size);
+void my_sort(void* collection, size_t size, size_t element_size);
 
 
 
