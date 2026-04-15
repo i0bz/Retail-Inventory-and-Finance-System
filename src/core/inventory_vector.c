@@ -24,7 +24,7 @@ void open_inventory() {
 }
 
 void close_inventory() {
-    if (inventory == NULL) 
+    if (inventory != NULL) 
         free(inventory);
 }
 
