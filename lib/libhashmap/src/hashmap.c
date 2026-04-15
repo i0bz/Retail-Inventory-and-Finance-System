@@ -127,15 +127,15 @@ void pop(Hashmap* map , void* key) {
 
 void foreach(Hashmap* map, void (*func)(void*)) {
 
-    size_t amount = 0;
+    size_t amount_iterated = 0;
     for (size_t i = 0; i < map->bucket_size; i++) {
-        if (amount == map->usage) return;
+        if (amount_iterated == map->usage) return;
         if (map->buckets[i].head == NULL) continue;
         List* list = &map->buckets[i];
         Node* iterator = list->head;
         while (iterator != NULL) {
             func(iterator->data);
-            amount++;
+            amount_iterated++;
             iterator = iterator->next;
         }
     }
