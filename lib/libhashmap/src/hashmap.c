@@ -85,8 +85,8 @@ void* search(Hashmap* map, void* key) {
     if (compare_keys(key, iterating_node->key)) return iterating_node->data;
 
     while (iterating_node != NULL) {
-        if (compare_keys(key, iterating_node->key)) return iterating_node->data;
         iterating_node = iterating_node->next;
+        if (compare_keys(key, iterating_node->key)) return iterating_node->data;
     }
 
     return NULL;
