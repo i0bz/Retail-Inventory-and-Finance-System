@@ -28,8 +28,6 @@ typedef struct Hashmap {
 
 
 
-Node* create_node(void* key, void* data);
-
 Hashmap* create_hashmap();
 void free_hashmap(Hashmap* map);
 

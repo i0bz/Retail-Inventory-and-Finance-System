@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+Node* create_node(void* key, void* data);
+
 Node* create_node(void* key, void* data) {
     Node* node = malloc(sizeof(Node));
 
