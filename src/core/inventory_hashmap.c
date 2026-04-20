@@ -19,8 +19,8 @@ bool compare_keys (void* key_1, void* key_2) {
 Product* create_product(unsigned int id, char* name, char* category, float price, size_t quantity) {
     Product* product = malloc(sizeof(Product));
     product->id = id;
-    strncpy(product->name, name, PRODUCT_STRING_BUFFER_SIZE);
-    strncpy(product->category, category, PRODUCT_STRING_BUFFER_SIZE);
+    strcpy_s(product->name, PRODUCT_STRING_BUFFER_SIZE, name);
+    strcpy_s(product->category, PRODUCT_STRING_BUFFER_SIZE, category);
     product->price = price;
     product->quantity = quantity;
     product->sold = 0;
