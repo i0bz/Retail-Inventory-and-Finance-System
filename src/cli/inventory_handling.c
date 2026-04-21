@@ -206,6 +206,10 @@ void process_sale() {
         exit_prompt();
         return;
     }
+    else if (product->quantity == 0ULL) {
+        printf("Product has 0 stocks.\n");
+        exit_prompt();
+    }
 
     size_t sold;
     printf("Enter quantity sold: ");
