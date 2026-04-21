@@ -61,8 +61,7 @@ void init_cli() {
         case EXIT:
             return;
         default:
-            printf("Choose from 1-12: ");
-            option = positive_integer_input();
+            printf("Choose from 1-12 only\n");
             break;
         }
     }
